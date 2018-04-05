@@ -1,12 +1,8 @@
-import os
-import sys
-from argparse import ArgumentParser
-
 from flask import Flask, request, abort
+
 from linebot import(
     LineBotApi, WebhookHandler
 )
-
 from linebot.exceptions import (
     InvalidSignatureError
 )
@@ -16,15 +12,15 @@ from linebot.models import (
 
 app = Flask(__name__)
 
-channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
-channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
+#channel_secret = os.getenv('LINE_CHANNEL_SECRET', None)
+#channel_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
 
-if channel_secret is None:
-    print('Specify LINE_CHANNEL_SECRET as environment variable.')
-    sys.exit(1)
-if channel_access_token is None:
-    print('Specify LINE_CHANNEL_ACCESS_TOKEN as environment variable.')
-    sys.exit(1)
+#if channel_secret is None:
+#    print('Specify LINE_CHANNEL_SECRET as environment variable.')
+#    sys.exit(1)
+#if channel_access_token is None:
+#    print('Specify LINE_CHANNEL_ACCESS_TOKEN as environment variable.')
+#    sys.exit(1)
 
 line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler(channel_secret)
@@ -54,5 +50,4 @@ def message_text(event):
     )
 
 if __name__ == "__main__":
-    port = int(os.getenv("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run()
